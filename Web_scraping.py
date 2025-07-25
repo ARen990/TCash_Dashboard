@@ -1,47 +1,43 @@
 from playwright.async_api import async_playwright
 import asyncio
+import json
 
 async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False)
         page = await browser.new_page()
 
-        await page.goto("https://course.mytcas.com/", wait_until='networkidle')
-        await page.wait_for_timeout(3000)
+        try:
+            print("กำลังเข้าสู่เว็บไซต์...")
+            await page.goto("https://course.mytcas.com/", wait_until='networkidle')
+            await page.wait_for_timeout(3000)
+            
+            # ค้นหาและกรอกข้อมูล
+            print("กำลังค้นหาช่องค้นหาและกรอกข้อมูล...")
+            search_input = 'input[id="search"]'
+            await page.wait_for_selector(search_input, timeout=10000)
+            await page.fill(search_input, "วิศวกรรมคอมพิวเตอร์")
+            
+            # คลิกปุ่มค้นหา
+            print("กำลังคลิกปุ่มค้นหา...")
+            search_button = 'i.i-search'
+            await page.click(search_button)
+            
+            # รอผลลัพธ์
+            print("กำลังรอผลลัพธ์...")
+            await page.wait_for_timeout(5000)
+            await page.wait_for_load_state('networkidle', timeout=10000)
+            
+            # ถ่ายภาพหน้าจอ
+            await page.screenshot(path="search_results.png", full_page=True)
+            print(f"URL ปัจจุบัน: {page.url}")
+            
 
-        # Fine input search be flexible
-        search_input = None
-        search_selectors = [
-            'input[id="search"]',
-            'input[placeholder*="พิมพ์ชื่อมหาวิทยาลัย"]',
-            'input[placeholder*="หลักสูตร"]',
-            'input[type="text"]',
-            '#search'
-        ]
-
-        for selector in search_selectors:
-            try:
-                await page.wait_for_selector(selector, timeout=3000)
-                search_input = selector
-                break
-            except:
-                continue
-
-        if not search_input:
-            print("Search box not found")
-            await page.screenshot(path="search_input_not_found.png")
+        except Exception as e:
+            print(f"เกิดข้อผิดพลาดหลัก: {e}")
+            await page.screenshot(path="error.png", full_page=True)
+        finally:
             await browser.close()
-            return
-
-        print("Found search box:", search_input)
-        await page.fill(search_input, "วิศวกรรมปัญญาประดิษฐ์")
-        await page.wait_for_timeout(1000)
-
-        # Enter for finding
-        await page.press(search_input, "Enter")
-        print("Searching ...")
-
-        await page.wait_for_timeout(4000)
 
 
 if __name__ == "__main__":
