@@ -5,6 +5,17 @@ import plotly.express as px
 
 st.set_page_config(page_title="University Course Dashboard", layout="wide")
 
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #748DAE;   /* สีพื้นหลังเว็บ */
+    }
+    [data-testid="stSidebar"] {
+        background-color: #9ECAD6;   /* สี Sidebar */
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Load data
 with open(r"D:\\Y3\\J.bod\data\data_clean.json", "r", encoding="utf-8") as f:
     data = json.load(f)
