@@ -5,33 +5,60 @@ import plotly.express as px
 
 st.set_page_config(page_title="University Course Dashboard", layout="wide")
 
+# ---------------------- CSS Fonts + Themes ----------------------
 st.markdown("""
     <style>
+    /* lode Fonts Kanit */
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Kanit', sans-serif !important;
+    }
+
+    /* background color */
     .stApp {
-        background-color: #748DAE;   /* สีพื้นหลังเว็บ */
+        background-color: #748DAE;
     }
     [data-testid="stSidebar"] {
-        background-color: #9ECAD6;   /* สี Sidebar */
+        background-color: #9ECAD6;
     }
-    </style>
-""", unsafe_allow_html=True)
 
-st.markdown("""
-    <style>
-    table {
-        font-size:12px !important;
-        border-collapse: collapse;
+    /* Title */
+    h1, .stTitle, .stSubheader {
+        font-family: 'Kanit', sans-serif !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
     }
-    th {
-        background-color: #9ECAD6 !important;  /* สีหัวตาราง */
+
+    /* หัวตาราง */
+    table th {
+        background-color: #9ECAD6 !important;
         color: black !important;
-        font-weight: bold;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        font-family: 'Kanit', sans-serif !important;
+    }
+
+    /* body in tabel */
+    table td {
+        font-size: 13px !important;
+        font-family: 'Kanit', sans-serif !important;
+    }
+
+    /* Metric Card */
+    .stMetric {
+        font-family: 'Kanit', sans-serif !important;
+    }
+
+    /* Shadow */
+    .element-container div[data-baseweb="plotly-chart"] {
+        box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
+        border-radius: 10px;
+        padding: 5px;
+        background-color: rgba(255,255,255,0.05);
     }
     </style>
 """, unsafe_allow_html=True)
-
-px.defaults.template = "simple_white"
-px.defaults.color_discrete_sequence = ["#9ECAD6", "#F5CBCB", "#FFEAEA", "#748DAE"]
 
 # Load data
 with open(r"D:\\Y3\\J.bod\data\data_clean.json", "r", encoding="utf-8") as f:
