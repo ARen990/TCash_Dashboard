@@ -63,6 +63,16 @@ has streamlit, pandas, plotly, streamlit-option-menu
    * View tuition fees and statistics
    * Analyze data with interactive charts
 
+## Project Structure
+
+```
+TCash_Dashboard/
+├── app.py                 # Main Streamlit app
+├── data/                  # Input data (JSON/CSV)
+├── requirements.txt       # Dependencies
+└── README.md
+```
+
 
 ## 📬 Contact
 - **GitHub:** [ARen990](https://github.com/ARen990)
