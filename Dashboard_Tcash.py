@@ -130,7 +130,24 @@ elif page == "Find Tuition Fees":
         nearest = df_sorted.nsmallest(5, "ต่างจากที่กรอก")
 
         st.write(f"**5 courses closest to {input_cost:,.0f} baht:**")
-        st.table(nearest[["มหาวิทยาลัย", "คณะ", "ชื่อหลักสูตร", "ค่าใช้จ่าย"]])
+
+        # เลือกคอลัมน์ที่จะแสดง
+        columns_order = ["มหาวิทยาลัย", "คณะ", "วิทยาเขต", "ชื่อหลักสูตร", "ประเภทหลักสูตร", "ค่าใช้จ่าย"]
+        df_show = nearest[columns_order]
+
+        # เปลี่ยนชื่อหัวตาราง
+        df_show = df_show.rename(columns={
+            "มหาวิทยาลัย": "University",
+            "คณะ": "Faculty",
+            "วิทยาเขต": "Campus",
+            "ชื่อหลักสูตร": "Course Name",
+            "ประเภทหลักสูตร": "Course Type",
+            "ค่าใช้จ่าย": "Tuition Fees"
+        })
+
+        # แสดงตาราง
+        st.table(df_show)
+
 
 
 # ---------------------- Add a Course search table page ----------------------
