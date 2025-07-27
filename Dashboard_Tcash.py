@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import plotly.express as px
+from streamlit_option_menu import option_menu
 
 st.set_page_config(page_title="University Course Dashboard", layout="wide")
 
@@ -70,10 +71,15 @@ df["ค่าใช้จ่าย"] = pd.to_numeric(df["ค่าใช้จ�
 
 # ---------------------- Create a page select button ----------------------
 
-page = st.sidebar.selectbox(
-    "MENU",
-    ["Dashboard", "Find Tuition Fees", "Course search table"]
-)
+with st.sidebar:
+    page = option_menu(
+        "MENU", 
+        ["Dashboard", "Find Tuition Fees", "Course search table"],
+        icons=["bar-chart", "search", "table"],
+        menu_icon="cast",
+        default_index=0
+    )
+
 
 # ---------------------- Add a Dashboard page ----------------------
 if page == "Dashboard":
