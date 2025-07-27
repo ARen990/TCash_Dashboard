@@ -120,6 +120,19 @@ elif page == "Find Tuition Fees":
 
     st.title("🔍 Find some tuition fees")
 
+    # --- Find close expenses ---
+    st.subheader("Find the course with the closest tuition fee")
+
+    input_cost = st.number_input("Enter the number (baht)", min_value=0, step=1000)
+    if input_cost > 0:
+        df_sorted = df.sort_values("ค่าใช้จ่าย").dropna(subset=["ค่าใช้จ่าย"])
+        df_sorted["ต่างจากที่กรอก"] = abs(df_sorted["ค่าใช้จ่าย"] - input_cost)
+        nearest = df_sorted.nsmallest(5, "ต่างจากที่กรอก")
+
+        st.write(f"**5 courses closest to {input_cost:,.0f} baht:**")
+        st.table(nearest[["มหาวิทยาลัย", "คณะ", "ชื่อหลักสูตร", "ค่าใช้จ่าย"]])
+
+
 # ---------------------- หน้า Course search table ----------------------
 elif page == "Course search table":
 
