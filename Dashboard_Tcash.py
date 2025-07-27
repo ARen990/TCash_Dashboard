@@ -115,7 +115,7 @@ if page == "Dashboard":
     )   
     st.plotly_chart(fig1, use_container_width=True)
 
-# ---------------------- เพิ่มหน้า Dashboard ----------------------
+# ---------------------- Add a Find Tuition Fees  page ----------------------
 elif page == "Find Tuition Fees":
 
     st.title("🔍 Find some tuition fees")
@@ -133,7 +133,36 @@ elif page == "Find Tuition Fees":
         st.table(nearest[["มหาวิทยาลัย", "คณะ", "ชื่อหลักสูตร", "ค่าใช้จ่าย"]])
 
 
-# ---------------------- หน้า Course search table ----------------------
+# ---------------------- Add a Course search table page ----------------------
 elif page == "Course search table":
 
     st.title("📋 Course search table")
+
+    option_uni = st.multiselect("Select a university", sorted(df["มหาวิทยาลัย"].unique()))
+    option_type = st.multiselect("Select course type", sorted(df["ประเภทหลักสูตร"].dropna().unique()))
+
+    filtered_df = df.copy()
+
+    if option_uni:
+        filtered_df = filtered_df[filtered_df["มหาวิทยาลัย"].isin(option_uni)]
+    if option_type:
+        filtered_df = filtered_df[filtered_df["ประเภทหลักสูตร"].isin(option_type)]
+
+    # st.dataframe(filtered_df, use_container_width=True)
+    
+        # Select the columns to sort as desired.
+    columns_order = ["มหาวิทยาลัย", "คณะ", "วิทยาเขต", "ชื่อหลักสูตร", "ประเภทหลักสูตร", "ค่าใช้จ่าย"]
+    df_show = filtered_df[columns_order]
+
+    # Rename the table header (if the current name does not match)
+    df_show = df_show.rename(columns={
+        "มหาวิทยาลัย": "University",
+        "คณะ": "Faculty",
+        "วิทยาเขต": "Campus",
+        "ชื่อหลักสูตร": "Course Name",
+        "ประเภทหลักสูตร": "Course type",
+        "ค่าใช้จ่าย": "Tuition Fees"
+    })
+
+    # show table
+    st.table(df_show)
