@@ -5,6 +5,8 @@ import plotly.express as px
 from streamlit_option_menu import option_menu
 
 st.set_page_config(page_title="University Course Dashboard", layout="wide")
+st.title("🎓 University Course Dashboard")
+
 
 # ---------------------- CSS Fonts + Themes ----------------------
 st.markdown("""
@@ -62,7 +64,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load data
-with open(r"D:\\Y3\\J.bod\data\data_clean.json", "r", encoding="utf-8") as f:
+with open(r".\data\data_clean.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 df = pd.DataFrame(data)
