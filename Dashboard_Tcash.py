@@ -16,6 +16,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+    <style>
+    table {
+        font-size:12px !important;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #9ECAD6 !important;  /* สีหัวตาราง */
+        color: black !important;
+        font-weight: bold;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+px.defaults.template = "simple_white"
+px.defaults.color_discrete_sequence = ["#9ECAD6", "#F5CBCB", "#FFEAEA", "#748DAE"]
+
 # Load data
 with open(r"D:\\Y3\\J.bod\data\data_clean.json", "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -147,8 +164,6 @@ elif page == "Find Tuition Fees":
 
         # แสดงตาราง
         st.table(df_show)
-
-
 
 # ---------------------- Add a Course search table page ----------------------
 elif page == "Course search table":
