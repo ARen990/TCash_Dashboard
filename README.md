@@ -1,29 +1,25 @@
 # Hi, My name is ARen 𝄞 .
 # Tcash Dashboard
 
-## Description
-TCash Dashboard is a web-based data visualization platform built with Streamlit. It allows users to explore and analyze Thai university course and Tuition Fees data with an intuitive and interactive interface.
+## Description  
+TCash Dashboard is a web-based data visualization platform built with Streamlit.  
+It allows users to explore and analyze Thai university course and tuition fees data with an intuitive and interactive interface.  
 
+## Features  
+- 📊 **Interactive Dashboard** – Visualize course and university data with dynamic charts (Plotly)  
+- 🔎 **Search & Filter** – Quickly find programs by university, faculty, or course name  
+- 📂 **Data Management** – Reads and processes data from JSON/CSV files  
+- 🎨 **Custom UI** – Styled interface with customized background colors and fonts 
 
-## Features
-- 📊 Interactive Dashboard – Visualize course and university data with dynamic charts (Plotly)
-
-- 🔎 Search & Filter – Quickly find programs by university, faculty, or course name
-
-- 📂 Data Management – Reads and processes data from JSON/CSV files
-
-- 🎨 Custom UI – Styled interface with customized background colors and fonts
-
-## Dataset
-The dashboard uses university and course data collected from the TCAS database (https://course.mytcas.com/).
-Data is stored in JSON/CSV format in the data/ folder.
-
+## Dataset  
+The dashboard uses university and course data collected from the [TCAS database](https://course.mytcas.com/).  
+Data is stored in JSON/CSV format in the `data/` folder.  
 
 ## Installation
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/ARen990/miniPROJECT_whatUeat.git
+git clone https://github.com/ARen990/TCash_Dashboard.git
 cd TCash_Dashboard
 ```
 
@@ -44,25 +40,28 @@ pip install -r requirements.txt
 
 ### Additional Code Information
 
-For further model modification or retraining:
-- `Trainmodelfood.ipynb` (Jupyter Notebook for training and adjusting the model)
-- `app.py` (Streamlit script for running the web application)
+`Dashboard_Tcash.py`
+The entry point for the dashboard. It loads data, handles layout (menus/pages), and renders all visualizations using Streamlit and Plotly.
 
-Ensure TensorFlow and Streamlit are installed:
+`data/ folder`
+Contains input data files, typically exported from the TCAS database or scraping pipeline. You can add/update files here for use in the dashboard.
 
-```bash
-pip install tensorflow streamlit numpy pandas
-```
+`requirements.txt`
+has streamlit, pandas, plotly, streamlit-option-menu
+
 
 ## Usage display
-1. Run `Dashboard_Tcash.py` using the command:
-```bash
-streamlit run app.py
-```
+1. Run the application:
+
+   ```bash
+   streamlit run app.py
+   ```
 2. Open a browser and go to `http://localhost:8501`
-3. Enter available ingredients (comma-separated), and optionally specify ingredients you dislike or are allergic to.
-4. Select the number of recommended dishes.
-5. Click to get food recommendations.
+3. Use the menu to navigate through different views:
+
+   * Filter universities and courses
+   * View tuition fees and statistics
+   * Analyze data with interactive charts
 
 
 ## 📬 Contact
